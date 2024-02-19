@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Pallete</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body style="background:url('static/bg.png') no-repeat;">
+
+<header>
+ <div class="title">
+<h1>Color World</h1>
+</div>
+</header>
+
+
+<div class="main-content">
+  <div class="componments">
+ <form method="post" action="{{url_for('upload')}}" enctype='multipart/form-data' id="myForm" >
+<div class="image-area" style="{% if not filename %}margin-top:70px;height:130px;width:30rem;{% endif %}">
+<input type="file" name="file" id="file">
+    {% if filename %}
+      <div class="image-container" style="margin-top:22px">
+ <img src="static/img/{{filename}}" width="100%" height="350">
+       </div>
+    {% else %}
+    <label for="file">Upload Image</label>
+     {% endif %}
+
+</div>
+     <div style="display:inline-block;">
+         <button type="submit" class="extract-button" style="margin-top:40px;">Imported</button>
+          <button type="submit" class="extract-button" style="margin-top:10px;"><a href="{{url_for('extract_color', path=filename)}}" style="color:white;text-decoration:none;">Extract</a></button>
+
+               <input type="number" width="22px" style="background-color:red;">
+
+
+
+
+</form>
+
+
+
+<table class="table" style="background-color:transparent;border-spacing:0;border-collapse:collapse;margin-top:23px;">
+  <thead>
+   {% if colors %}
+    <tr>
+
+      <th scope="col">Color</th>
+      <th scope="col">Color Code</th>
+
+    </tr>
+     {% endif %}
+  </thead>
+  <tbody>
+  {% if colors %}
+  {% for color in colors %}
+    <tr>
+
+      <td style="background-color:{{color}};width:150px;"></td>
+      <td>{{color}}</td>
+
+    </tr>
+ {% endfor %}
+ {% endif %}
+
+
+
+
+
+  </tbody>
+</table>
+
+</div>
+
+
+
+</body>
+</html>
